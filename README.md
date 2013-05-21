@@ -4,7 +4,7 @@ SpoilerFreeScoreboard
 
 Demo
 ====
-http://jgossit.appspot.com/scoreboard
+<a target="_blank" href="http://jgossit.appspot.com/scoreboard">jgossit.appspot.com/scoreboard</a>
 
 Output
 ======

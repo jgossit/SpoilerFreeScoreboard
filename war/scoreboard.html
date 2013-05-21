@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>Scoreboard</title>
+	<link type="text/css" href="jquery-ui.css" rel="Stylesheet"/>
+	<script type="text/javascript" src="jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="jquery-ui.js"></script>
+	<style>
+		label,select,input,button,img {
+			font-family:verdana;
+			font-size:12px;
+			margin-bottom:5px;
+			margin-left:10px;
+		}
+		label {
+			color:white;
+		}
+	</style>
+	<script>
+		$(function()
+		{
+			$('#datepicker').datepicker({ dateFormat: "yy-mm-dd" });
+			$('#datepicker').datepicker("setDate", -1);
+			$('#button').button().click(function()
+			{
+				var league = $('#league').val();
+				var date = $('#datepicker').val();
+				if (date)
+				{
+					$('#iframe').attr('src','scoreboard?league='+league+'&date='+date);
+				}
+				return false;
+			});
+			$('#button').css("font-size","12px").css("font-family","verdana");
+		});
+	</script>
+</head>
+<body background="images/bg.jpg">
+	<div align="center">
+	<img src="images/scoreboard.png"/><br>
+	<label for="league">League:</label>
+	<select id="league" name="league">
+		<option value="nba">nba</option>
+	</select>
+	
+	<label for="datepicker">Date:</label>
+	<input type="text" id="datepicker" />
+	<button id="button">Go</button>
+	<iframe style="border: 0px" id="iframe" width="100%" height="100%"></iframe>
+	</div>
+</body>
+</html>

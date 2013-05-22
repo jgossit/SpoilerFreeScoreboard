@@ -126,7 +126,9 @@ public class Scoreboard extends HttpServlet
 						periods++;
 						if (periods < 5)
 						{
-							int periodScore = Integer.parseInt(line.substring(line.indexOf(">")+1, line.indexOf("</")));
+							int periodScore = 0;
+							if (!line.contains("&nbsp;"))
+								periodScore = Integer.parseInt(line.substring(line.indexOf(">")+1, line.indexOf("</")));
 							int cumulativeScore = 0;
 							if (awayTeam)
 							{

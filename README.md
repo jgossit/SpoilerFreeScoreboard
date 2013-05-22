@@ -26,7 +26,9 @@ http://hostname/scoreboard?league=nba&date=2013-04-01
 Demo
 ====
 Available here <a target="_blank" href="http://jgossit.appspot.com/scoreboard">jgossit.appspot.com/scoreboard</a>
-
+<p align="center" >
+  <img src="https://raw.github.com/jgossit/GarminActivityCompare/master/example/web form.png">
+</p>
 
 Output
 ======

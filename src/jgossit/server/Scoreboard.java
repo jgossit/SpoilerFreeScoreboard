@@ -86,6 +86,9 @@ public class Scoreboard extends HttpServlet
 			if (line.contains("class=\"" + SCOREBOARD_CLASS + "\""))
 				inScoreHeader = true;
 			
+			if (line.contains("refreshTime")) // don't refresh the page (every 60 seconds), also URL would need correcting
+				continue;
+			
 			if(inBody)
 			{
 				if (!line.contains(SCOREBOARD_DIV_ID))

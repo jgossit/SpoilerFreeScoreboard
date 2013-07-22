@@ -9,7 +9,7 @@ By clicking on one of the hidden areas the scores/information are revealed.
 
 Additional details on whether the game was close after three quarters, four quarters or went to overtime can be displayed as well.
 
-At the moment only the NBA is supported.
+At the moment the NBA and MLB are supported.
 
 
 Usage

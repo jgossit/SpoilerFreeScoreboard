@@ -22,6 +22,7 @@ public class Scoreboard extends HttpServlet
 		if (league == null || date == null)
 			resp.sendRedirect("scoreboard.html");
 		
+		resp.setContentType("text/html; charset=UTF-8");
 		getScoreboard(league, date, resp.getWriter());
 	}
 	

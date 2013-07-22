@@ -34,7 +34,8 @@ public class Scoreboard extends HttpServlet
 	private static final String JQUERY_CODE = 
 			"<link type='text/css' href='jquery-ui.css' rel='Stylesheet'/>\n" + 
 			"<script type='text/javascript' src='jquery-1.9.1.js'></script>\n" + 
-			"<script type='text/javascript' src='jquery-ui.js'></script>\n";
+			"<script type='text/javascript' src='jquery-ui.js'></script>\n" +
+			"<script type='text/javascript' src='scoreboard.js'></script>\n";
 	
 	private void getScoreboard(String league, String date, PrintWriter printWriter) throws IOException
 	{

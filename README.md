@@ -9,7 +9,7 @@ By clicking on one of the hidden areas the scores/information are revealed.
 
 Additional details on whether the game was close after three quarters, four quarters or went to overtime can be displayed as well.
 
-At the moment the NBA and MLB are supported.
+At the moment the NBA, NFL and MLB are supported.
 
 
 Usage
@@ -21,6 +21,8 @@ Calling the Scoreboard servlet requires league and date parameters be included i
 
 e.g. for NBA scores for April 1, 2013
 http://hostname/scoreboard?league=nba&date=2013-04-01
+e.g. for NFL scores for Week 1
+http://hostname/scoreboard?league=nfl&date=1
 
 
 Demo

@@ -19,9 +19,9 @@ The war directory contains a WEB-INF/web.xml for deploying the servlet to your a
 
 Calling the Scoreboard servlet requires league and date parameters be included in the query string
 
-e.g. for NBA scores for April 1, 2013
-http://hostname/scoreboard?league=nba&date=2013-04-01
-e.g. for NFL scores for Week 1
+e.g. for NBA scores for April 1, 2013<br>
+http://hostname/scoreboard?league=nba&date=2013-04-01<br>
+e.g. for NFL scores for Week 1<br>
 http://hostname/scoreboard?league=nfl&date=1
 
 

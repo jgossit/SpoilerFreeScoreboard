@@ -11,7 +11,7 @@ function hideFinalScores(ele)
 function getInsertQuestionsString(ele)
 {
 	var overTime = ele.find('tbody > tr.ysptblclbg5:first > td.yspscores:eq(5)').text() == '00' ? 'No&nbsp;' : 'Yes';
-	return getInsertQuestionString('Within 8 after third quarter?', withinMargin(ele, 3, 8)) +
-		   getInsertQuestionString('Within 8 after fourth quarter?', withinMargin(ele, 4, 8))+
+	return getInsertQuestionString('Within 10 after third quarter?', withinMargin(ele, 3, 10)) +
+		   getInsertQuestionString('Within 7 after fourth quarter?', withinMargin(ele, 4, 7))+
 		   getInsertQuestionString('Overtime?', withinMargin(ele, 4, 0));
 }

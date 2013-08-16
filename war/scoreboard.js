@@ -24,52 +24,68 @@ function withinMargin(ele, periodNum, margin)
 
 $(function()
 {
+	$('a').not('[href^="http"]').each(function(index)
+	{
+		var hrefVal = $(this).attr('href');
+		$(this).attr('href','http://sports.yahoo.com'+hrefVal);
+	});
 	$('img[src*="or_arrow"]').hide(); // arrow indicating winner
 	$('tr.ysptblclbg5').each(function(index)
 	{
-		while ($(this).find('td[class="yspscores"]').length < 7) // insert empty scores for OT periods that didn't happen
-			$(this).find('td[class="yspscores"]').last().after('<td style="border:1px dotted red;color:EEEEDD" class="yspscores">00</td>');
+		if ($(this).find('td[class="yspscores"]').length != 0) // NFL pre-game status
+		{
+			while ($(this).find('td[class="yspscores"]').length < 7) // insert empty scores for OT periods that didn't happen
+				$(this).find('td[class="yspscores"]').last().after('<td style="border:1px dotted red;color:EEEEDD" class="yspscores">00</td>');
 
-		// borders showing fields that can be revealed, blend text to background color
-		$(this).find('td[class="yspscores"]').css( { border : "1px dotted red", color : "EEEEDD" } );
-		hideFinalScores($(this));
-		
-		var cumulativeScore = 0;
-		$(this).find('td[class="yspscores"]').each(function(index) // period scores
-		{
-			if ($(this).text() != 'X')
-				cumulativeScore += parseInt($(this).text());
-			padZeros($(this), padZerosPeriodLength);
-			if (index > 0 && index < regulationPeriods) // append cumulative score for regulation periods
-				$(this).text($(this).text() + "(" + cumulativeScore + ") ");
-		});
-		
-		$(this).find('td > span[class="yspscores"]').each(function(index) // total score
-		{
-			padZeros($(this), padZerosTotalLength);
-		});
+			// borders showing fields that can be revealed, blend text to background color
+			$(this).find('td[class="yspscores"]').css( { border : "1px dotted red", color : "EEEEDD" } );
+			hideFinalScores($(this));
+			
+			var cumulativeScore = 0;
+			$(this).find('td[class="yspscores"]').each(function(index) // period scores
+			{
+				if ($(this).text() != 'X')
+					cumulativeScore += parseInt($(this).text());
+				padZeros($(this), padZerosPeriodLength);
+				if (index > 0 && index < regulationPeriods) // append cumulative score for regulation periods
+					$(this).text($(this).text() + "(" + cumulativeScore + ") ");
+			});
+			
+			$(this).find('td > span[class="yspscores"]').each(function(index) // total score
+			{
+				padZeros($(this), padZerosTotalLength);
+			});
+		}
 	});
 	
 	$("table.scores").each(function(index)
 	{
-		$(this).find('tbody > tr > td[width=25]:gt(3)').remove(); // existing OT headers
+		$(this).find('tbody > tr > td[width=25]:gt(3)').remove(); // existing NBA OT headers
+		$(this).find('tbody > tr > td[width=23]:gt(3)').remove(); //          NFL
 		for (var i=1;i<4;i++) // replace with ambiguous OT headers
+		{
 			$(this).find('tbody > tr > td[width=25]:last').after('<td rowspan="5" width="1" class="yspwhitebg"></td><td width="25" class="yspscores">' + i + 'OT?</td>');
-
+			$(this).find('tbody > tr > td[width=23]:last').after('<td rowspan="5" width="1" class="yspwhitebg"></td><td width="23" class="yspscores">' + i + 'OT?</td>');
+		}
 		$(this).find('tbody > tr > td[width=25]').attr('width', '40'); // to encompass cumulative scores
+		$(this).find('tbody > tr > td[width=23]').attr('width', '40');
+		$(this).find('tbody > tr > td[width=18]:lt(-3)').attr('width', '40');
 		
-		$(this).next('table').css( { border : "1px dotted red", color : "EEEEDD" } ).children('tbody').css( { visibility : 'hidden' }); // recap box
+		if ($(this).find('tbody > tr.ysptblclbg5:first').find('td[class="yspscores"]').length != 0)
+		{
+			$(this).next('table').css( { border : "1px dotted red", color : "EEEEDD" } ).children('tbody').css( { visibility : 'hidden' }); // recap box
 		
-		var insertQuestionsString = "<tr><td><table><tbody>";
-		insertQuestionsString += getInsertQuestionsString($(this));
-		insertQuestionsString += "</tbody></table></td></tr>";
-		$(this).parent().parent().after(insertQuestionsString);
+			var insertQuestionsString = "<tr><td><table><tbody>";
+			insertQuestionsString += getInsertQuestionsString($(this));
+			insertQuestionsString += "</tbody></table></td></tr>";
+			$(this).parent().parent().after(insertQuestionsString);
+		}
 	});
 	
 	$("table.scores > tbody > tr.ysptblbdr2 > td").attr('colspan', '21'); // to encompass additional OT columns
 	$("table.scores > tbody > tr.yspwhitebg:first").attr('colspan', '19');
-	$("#hd, #ft, #container, td.ysprtcol1, #ys-scoreboard-main + td, #ysp-leaguescoreboard > div > table > tbody > tr:first, #ysp-leaguescoreboard > table > tbody > tr:first, table.yspcontent:first > tbody > tr:first").remove(); // unnecessary yahoo stuff
-	$("#ys-scoreboard-main, table.yspcontent:first, #doc, #bd, #ysp-leaguescoreboard > div > table").attr('width', '100%');
+	$("#yucsHead, .footer, .mast, #hd, #ft, #container, td.ysprtcol1, #ys-scoreboard-main + td, #ysp-leaguescoreboard > div > table > tbody > tr:first, #ysp-leaguescoreboard > table > tbody > tr:first, table.yspcontent:first > tbody > tr:first, #scoreboard > tbody > tr > td:nth-child(2), #scoreboard > tbody > tr > td > table > tbody > tr:lt(-1), div[id^='nfl:scoreboard'] > table > tbody > tr:nth-child(1)").remove(); // unnecessary yahoo stuff
+	$("#ys-scoreboard-main, table.yspcontent:first, #doc, #bd, #ysp-leaguescoreboard > div > table, #scoreboard > tbody > tr > td > table").attr('width', '100%');
 	$("#doc, #bd").attr('id', null);
 	
 	// reveal (unhide and make text visible)

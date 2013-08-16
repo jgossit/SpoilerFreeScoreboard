@@ -39,7 +39,7 @@ public class Scoreboard extends HttpServlet
 	
 	private void getScoreboard(String league, String date, PrintWriter printWriter) throws IOException
 	{
-		String address = "http://sports.yahoo.com/" + league + "/scoreboard?d=" + date;
+		String address = "http://sports.yahoo.com/" + league + "/scoreboard?" + (league.equals("nfl") ? "w=" : "d=") + date;
 		URL url = new URL(address);
 		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 		urlConnection.setUseCaches(false);

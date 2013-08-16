@@ -19,12 +19,33 @@
 	<script>
 		$(function()
 		{
+			$( "#league" ).change(function() {
+				if ($("#league option:selected").val() == 'nfl')
+				{
+					$('#datepicker').hide();
+					$('#datepickerlabel').hide();
+					$('#weekpicker').show();
+					$('#weekpickerlabel').show();
+				}
+				else
+				{
+					$('#datepicker').show();
+					$('#datepickerlabel').show();
+					$('#weekpicker').hide();
+					$('#weekpickerlabel').hide();
+				}
+			});
 			$('#datepicker').datepicker({ dateFormat: "yy-mm-dd" });
 			$('#datepicker').datepicker("setDate", -1);
+			$('#weekpicker').hide();
+			$('#weekpickerlabel').hide();
 			$('#button').button().click(function()
 			{
 				var league = $('#league').val();
-				var date = $('#datepicker').val();
+				if (league == 'nfl')
+					var date = $("#weekpicker option:selected").val();
+				else
+					var date = $('#datepicker').val();
 				if (date)
 				{
 					$('#iframe').attr('src','scoreboard?league='+league+'&date='+date);
@@ -41,11 +62,20 @@
 	<label for="league">League:</label>
 	<select id="league" name="league">
 		<option value="nba" selected>nba</option>
+		<option value="nfl">nfl</option>
 		<option value="mlb">mlb</option>
 	</select>
 	
-	<label for="datepicker">Date:</label>
+	<label id="datepickerlabel" for="datepicker">Date:</label>
 	<input type="text" id="datepicker" />
+	<label id="weekpickerlabel" for="weekpicker">Week:</label>
+	<select id="weekpicker">
+		<option value="p1" selected>Preseason HoF</option>
+		<option value="p2">Preseason Week 1</option>
+		<option value="p3">Preseason Week 2</option>
+		<option value="p4">Preseason Week 3</option>
+		<option value="p5">Preseason Week 4</option>
+	</select>
 	<button id="button">Go</button>
 	<iframe style="border: 0px" id="iframe" width="100%" height="100%"></iframe>
 	</div>
